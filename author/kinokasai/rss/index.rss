@@ -1,48 +1,35 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>kinokasai - Ludum Files</title><description>Lost documents on Game Crafting</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Fri, 25 Mar 2016 12:09:42 GMT</lastBuildDate><atom:link href="http://localhost:2368/author/kinokasai/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>The first year student's Tiger Generator</title><description>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>kinokasai - Ludum Files</title><description>Lost documents on Game Crafting</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Fri, 25 Mar 2016 15:24:30 GMT</lastBuildDate><atom:link href="http://localhost:2368/author/kinokasai/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>The first year student's Tiger Generator</title><description>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
 
-&lt;p&gt;I've thougt a lot about how to name that code generator. Indeed, it's &lt;br&gt;
-programmed using somewhat bad practices, that shouldn't be used in a regular &lt;br&gt;
-project. However, despite all its fault, this project possesses one of the most &lt;br&gt;
-important properties one should expect from software: &lt;em&gt;it works.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I've thougt a lot about how to name that code generator. Indeed, it's programmed using somewhat bad practices, that shouldn't be used in a regular project. However, despite all its fault, this project possesses one of the most important properties one should expect from software: &lt;em&gt;it works.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h6 id="meetjoseph"&gt;Meet Joseph&lt;/h6&gt;</description><link>http://localhost:2368/the-first-year-students-tiger-generator/</link><guid isPermaLink="false">844153bb-1af9-410f-90ac-0a07bef0e2b2</guid><dc:creator>kinokasai</dc:creator><pubDate>Fri, 25 Mar 2016 11:16:42 GMT</pubDate><content:encoded>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
+&lt;h2 id="meetjoseph"&gt;Meet Joseph&lt;/h2&gt;</description><link>http://localhost:2368/the-first-year-students-tiger-generator/</link><guid isPermaLink="false">844153bb-1af9-410f-90ac-0a07bef0e2b2</guid><dc:creator>kinokasai</dc:creator><pubDate>Fri, 25 Mar 2016 11:16:42 GMT</pubDate><content:encoded>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
 
-&lt;p&gt;I've thougt a lot about how to name that code generator. Indeed, it's &lt;br&gt;
-programmed using somewhat bad practices, that shouldn't be used in a regular &lt;br&gt;
-project. However, despite all its fault, this project possesses one of the most &lt;br&gt;
-important properties one should expect from software: &lt;em&gt;it works.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I've thougt a lot about how to name that code generator. Indeed, it's programmed using somewhat bad practices, that shouldn't be used in a regular project. However, despite all its fault, this project possesses one of the most important properties one should expect from software: &lt;em&gt;it works.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h6 id="meetjoseph"&gt;Meet Joseph&lt;/h6&gt;
+&lt;h2 id="meetjoseph"&gt;Meet Joseph&lt;/h2&gt;
 
-&lt;p&gt;Joseph is cool, Joseph is hip. Joseph is young. Joseph has dreams. Joseph is a &lt;br&gt;
-first year student.&lt;/p&gt;
+&lt;p&gt;Joseph is cool, Joseph is hip. Joseph is young. Joseph has dreams. Joseph is a first year student.&lt;/p&gt;
 
-&lt;p&gt;Joseph - in a flash of dazzling youngness - decides to write a Tiger &lt;br&gt;
-Generator in Python.&lt;/p&gt;
+&lt;p&gt;Joseph - in a flash of dazzling youngness - decides to write a Tiger Generator in Python.&lt;/p&gt;
 
 &lt;h2 id="firststepterminals"&gt;First step: terminals&lt;/h2&gt;
 
-&lt;p&gt;However, Joseph has no idea how to build a code generator from scratch. &lt;br&gt;
-After a short moment of reflexion, he comes to two conclusions. &lt;br&gt;
-First one is that all code is in the end only a sequence of letters, a string. &lt;br&gt;
-The second one is the following: &lt;br&gt;
-To build a generator from scratch, one must ask what the language's building &lt;br&gt;
-blocks are. In tiger, those are terminals. Luckily, there's only two of them: &lt;br&gt;
-&lt;code&gt;int&lt;/code&gt; and &lt;code&gt;string&lt;/code&gt;. So Joseph builds functions to generate those terminals.&lt;/p&gt;
+&lt;p&gt;However, Joseph has no idea how to build a code generator from scratch. After a short moment of reflexion, he comes to two conclusions. First one is that all code is in the end only a sequence of letters, a string. The second one is the following: &lt;br&gt;
+To build a generator from scratch, one must ask what the language's building blocks are. In tiger, those are terminals. Luckily, there's only two of them: &lt;code&gt;int&lt;/code&gt; and &lt;code&gt;string&lt;/code&gt;. So Joseph builds functions to generate those terminals.&lt;/p&gt;
 
-&lt;p&gt;"What's an int for the Tiger language?" ponders Joseph.
-Now, Joseph might be young, but he knows that documentation is important. &lt;br&gt;
-Browsing the documentation, he finds the following sentence: &lt;br&gt;
-"Since the compiler targets 32-bit architectures, since it needs to handle
+&lt;p&gt;"What's an int for the Tiger language?" ponders Joseph.&lt;/p&gt;
+
+&lt;p&gt;Now, Joseph might be young, but he knows that documentation is important.  Browsing the documentation, he finds the following sentence:&lt;/p&gt;
+
+&lt;p&gt;"Since the compiler targets 32-bit architectures, since it needs to handle
 signed integers, a literal integer value must fit in a signed 32-bit integer" &lt;br&gt;
-"Ah ! Since we must reserve one bit for the sign, only 31 bits are available.
+" - Ah ! Since we must reserve one bit for the sign, only 31 bits are available.
 So an int is nothing more than a number between 0 and 2^31 - 1"&lt;/p&gt;
 
 &lt;p&gt;"But since I'm generating code, that is to say a blob of text, I must not
 forget to stringify it."&lt;/p&gt;
 
-&lt;p&gt;Luckily for Joseph, Python makes it ridiculously easy to generate that with the &lt;br&gt;
-random module.&lt;/p&gt;
+&lt;p&gt;Luckily for Joseph, Python makes it ridiculously easy to generate that with the random module.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="language- language-python"&gt;max_int = 2147483647  
 # Joseph is only a first year student, and while he's slightly ahead
@@ -52,11 +39,7 @@ def generate_int():
    return str(random.randint(0, max_int))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Generating a terminal string is not much more difficult. Indeed, a random &lt;br&gt;
-string in nothing more than a sequence of random letters.&lt;/p&gt;
-
-&lt;p&gt;Python possesses a string containing all letters, &lt;code&gt;string.ascii_letters&lt;/code&gt; &lt;br&gt;
-To get a random letter, Joseph uses random again: &lt;br&gt;
+&lt;p&gt;Generating a terminal string is not much more difficult. Indeed, a random string in nothing more than a sequence of random letters. Python possesses a string containing all letters, &lt;code&gt;string.ascii_letters&lt;/code&gt;. To get a random letter, Joseph uses random again: &lt;br&gt;
 &lt;code&gt;random.choice(string.ascii_letters)&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Then, he joins the result:&lt;/p&gt;
@@ -69,10 +52,10 @@ To get a random letter, Joseph uses random again: &lt;br&gt;
 
 &lt;p&gt;Now, to call them.&lt;/p&gt;
 
-&lt;p&gt;Using all its software development experience, Joseph takes the initiative to &lt;br&gt;
-instantiate a globally scoped list of functions: &lt;code&gt;terminals&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Using all its software development experience, Joseph takes the initiative to instantiate a globally scoped list of functions: &lt;code&gt;terminals&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;terminals = [generate_int, generate_string]&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;terminals = [generate_int, generate_string]  
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;He then proceeds to build the wrapper function:&lt;/p&gt;
 
@@ -81,22 +64,19 @@ instantiate a globally scoped list of functions: &lt;code&gt;terminals&lt;/code&
     return dec()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;To put the final touch to his Magnus Opus, his Guernica, his Mona Lisa, &lt;br&gt;
-Joseph writes the main function:&lt;/p&gt;
+&lt;p&gt;To put the final touch to his Magnus Opus, his Guernica, his Mona Lisa, Joseph writes the main function:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="language- language-python"&gt;def generate_code():  
+&lt;pre&gt;&lt;code class="language- language-python"&gt;def generate_code(decnum=3):  
     code = ''
-    for i in range(0, dec):
+    for i in range(0, decnum):
         code += generate_dec() + '\n'
-    return code;
+    return code
 
 if __name__ == '__main__':  
     print(generate_code())
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;And then, exhausted by his work, Joseph falls asleep, knowing deep inside that, &lt;br&gt;
-in the end, what he had there was a correct, parsable, bindable, type-correct &lt;br&gt;
-generator.&lt;/p&gt;</content:encoded></item><item><title>Welcome to Ghost</title><description>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list&lt;/p&gt;</description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">75c3c329-3c27-40ce-81a5-7d2844759f8b</guid><category>Getting Started</category><dc:creator>kinokasai</dc:creator><pubDate>Fri, 25 Mar 2016 10:55:11 GMT</pubDate><content:encoded>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!&lt;/p&gt;
+&lt;p&gt;And then, exhausted by his work, Joseph falls asleep, knowing deep inside that, in the end, what he had there was a correct, parsable, bindable, type-correct generator.&lt;/p&gt;</content:encoded></item><item><title>Welcome to Ghost</title><description>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list&lt;/p&gt;</description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">75c3c329-3c27-40ce-81a5-7d2844759f8b</guid><category>Getting Started</category><dc:creator>kinokasai</dc:creator><pubDate>Fri, 25 Mar 2016 10:55:11 GMT</pubDate><content:encoded>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!&lt;/p&gt;
 
 &lt;h2 id="gettingstarted"&gt;Getting Started&lt;/h2&gt;
 

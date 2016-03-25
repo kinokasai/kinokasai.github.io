@@ -41,7 +41,7 @@
     </script>
 
     <meta name="generator" content="Ghost 0.7">
-    <link rel="alternate" type="application/rss+xml" title="Ludum Files" href="rss.6">
+    <link rel="alternate" type="application/rss+xml" title="Ludum Files" href="rss.7">
 </head>
 <body class="home-template">
 
@@ -51,7 +51,7 @@
                 <div class="site-title-wrapper">
                         <h1 class="site-title"><a class="js-ajax-link" title="Ludum Files" href="index.html">Ludum Files</a></h1>
 
-                        <a class="button-square" href="rss.6"><i class="fa fa-rss"></i></a>
+                        <a class="button-square" href="rss.7"><i class="fa fa-rss"></i></a>
                 </div>
 
                 <ul class="site-nav">
@@ -79,42 +79,32 @@
 
         <h2 id="intro">Intro</h2>
 
-<p>I've thougt a lot about how to name that code generator. Indeed, it's <br>
-programmed using somewhat bad practices, that shouldn't be used in a regular <br>
-project. However, despite all its fault, this project possesses one of the most <br>
-important properties one should expect from software: <em>it works.</em></p>
+<p>I've thougt a lot about how to name that code generator. Indeed, it's programmed using somewhat bad practices, that shouldn't be used in a regular project. However, despite all its fault, this project possesses one of the most important properties one should expect from software: <em>it works.</em></p>
 
-<h6 id="meetjoseph">Meet Joseph</h6>
+<h2 id="meetjoseph">Meet Joseph</h2>
 
-<p>Joseph is cool, Joseph is hip. Joseph is young. Joseph has dreams. Joseph is a <br>
-first year student.</p>
+<p>Joseph is cool, Joseph is hip. Joseph is young. Joseph has dreams. Joseph is a first year student.</p>
 
-<p>Joseph - in a flash of dazzling youngness - decides to write a Tiger <br>
-Generator in Python.</p>
+<p>Joseph - in a flash of dazzling youngness - decides to write a Tiger Generator in Python.</p>
 
 <h2 id="firststepterminals">First step: terminals</h2>
 
-<p>However, Joseph has no idea how to build a code generator from scratch. <br>
-After a short moment of reflexion, he comes to two conclusions. <br>
-First one is that all code is in the end only a sequence of letters, a string. <br>
-The second one is the following: <br>
-To build a generator from scratch, one must ask what the language's building <br>
-blocks are. In tiger, those are terminals. Luckily, there's only two of them: <br>
-<code>int</code> and <code>string</code>. So Joseph builds functions to generate those terminals.</p>
+<p>However, Joseph has no idea how to build a code generator from scratch. After a short moment of reflexion, he comes to two conclusions. First one is that all code is in the end only a sequence of letters, a string. The second one is the following: <br>
+To build a generator from scratch, one must ask what the language's building blocks are. In tiger, those are terminals. Luckily, there's only two of them: <code>int</code> and <code>string</code>. So Joseph builds functions to generate those terminals.</p>
 
-<p>"What's an int for the Tiger language?" ponders Joseph.
-Now, Joseph might be young, but he knows that documentation is important. <br>
-Browsing the documentation, he finds the following sentence: <br>
-"Since the compiler targets 32-bit architectures, since it needs to handle
+<p>"What's an int for the Tiger language?" ponders Joseph.</p>
+
+<p>Now, Joseph might be young, but he knows that documentation is important.  Browsing the documentation, he finds the following sentence:</p>
+
+<p>"Since the compiler targets 32-bit architectures, since it needs to handle
 signed integers, a literal integer value must fit in a signed 32-bit integer" <br>
-"Ah ! Since we must reserve one bit for the sign, only 31 bits are available.
+" - Ah ! Since we must reserve one bit for the sign, only 31 bits are available.
 So an int is nothing more than a number between 0 and 2^31 - 1"</p>
 
 <p>"But since I'm generating code, that is to say a blob of text, I must not
 forget to stringify it."</p>
 
-<p>Luckily for Joseph, Python makes it ridiculously easy to generate that with the <br>
-random module.</p>
+<p>Luckily for Joseph, Python makes it ridiculously easy to generate that with the random module.</p>
 
 <pre><code class="language- language-python">max_int = 2147483647  
 # Joseph is only a first year student, and while he's slightly ahead
@@ -124,11 +114,7 @@ def generate_int():
    return str(random.randint(0, max_int))
 </code></pre>
 
-<p>Generating a terminal string is not much more difficult. Indeed, a random <br>
-string in nothing more than a sequence of random letters.</p>
-
-<p>Python possesses a string containing all letters, <code>string.ascii_letters</code> <br>
-To get a random letter, Joseph uses random again: <br>
+<p>Generating a terminal string is not much more difficult. Indeed, a random string in nothing more than a sequence of random letters. Python possesses a string containing all letters, <code>string.ascii_letters</code>. To get a random letter, Joseph uses random again: <br>
 <code>random.choice(string.ascii_letters)</code></p>
 
 <p>Then, he joins the result:</p>
@@ -141,10 +127,10 @@ To get a random letter, Joseph uses random again: <br>
 
 <p>Now, to call them.</p>
 
-<p>Using all its software development experience, Joseph takes the initiative to <br>
-instantiate a globally scoped list of functions: <code>terminals</code>.</p>
+<p>Using all its software development experience, Joseph takes the initiative to instantiate a globally scoped list of functions: <code>terminals</code>.</p>
 
-<p><code>terminals = [generate_int, generate_string]</code></p>
+<pre><code>terminals = [generate_int, generate_string]  
+</code></pre>
 
 <p>He then proceeds to build the wrapper function:</p>
 
@@ -153,22 +139,19 @@ instantiate a globally scoped list of functions: <code>terminals</code>.</p>
     return dec()
 </code></pre>
 
-<p>To put the final touch to his Magnus Opus, his Guernica, his Mona Lisa, <br>
-Joseph writes the main function:</p>
+<p>To put the final touch to his Magnus Opus, his Guernica, his Mona Lisa, Joseph writes the main function:</p>
 
-<pre><code class="language- language-python">def generate_code():  
+<pre><code class="language- language-python">def generate_code(decnum=3):  
     code = ''
-    for i in range(0, dec):
+    for i in range(0, decnum):
         code += generate_dec() + '\n'
-    return code;
+    return code
 
 if __name__ == '__main__':  
     print(generate_code())
 </code></pre>
 
-<p>And then, exhausted by his work, Joseph falls asleep, knowing deep inside that, <br>
-in the end, what he had there was a correct, parsable, bindable, type-correct <br>
-generator.</p>
+<p>And then, exhausted by his work, Joseph falls asleep, knowing deep inside that, in the end, what he had there was a correct, parsable, bindable, type-correct generator.</p>
     </div>
 
     <footer class="post-footer clearfix">
