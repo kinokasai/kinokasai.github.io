@@ -1,18 +1,18 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>kinokasai - Ludum Files</title><description>Lost documents on Game Crafting</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Fri, 25 Mar 2016 11:55:02 GMT</lastBuildDate><atom:link href="http://localhost:2368/author/kinokasai/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>The first year student's Tiger Generator</title><description>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>kinokasai - Ludum Files</title><description>Lost documents on Game Crafting</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Fri, 25 Mar 2016 12:09:42 GMT</lastBuildDate><atom:link href="http://localhost:2368/author/kinokasai/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>The first year student's Tiger Generator</title><description>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
 
 &lt;p&gt;I've thougt a lot about how to name that code generator. Indeed, it's &lt;br&gt;
 programmed using somewhat bad practices, that shouldn't be used in a regular &lt;br&gt;
 project. However, despite all its fault, this project possesses one of the most &lt;br&gt;
 important properties one should expect from software: &lt;em&gt;it works.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2 id="meetjoseph"&gt;Meet Joseph&lt;/h2&gt;</description><link>http://localhost:2368/the-first-year-students-tiger-generator/</link><guid isPermaLink="false">844153bb-1af9-410f-90ac-0a07bef0e2b2</guid><dc:creator>kinokasai</dc:creator><pubDate>Fri, 25 Mar 2016 11:16:42 GMT</pubDate><content:encoded>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
+&lt;h6 id="meetjoseph"&gt;Meet Joseph&lt;/h6&gt;</description><link>http://localhost:2368/the-first-year-students-tiger-generator/</link><guid isPermaLink="false">844153bb-1af9-410f-90ac-0a07bef0e2b2</guid><dc:creator>kinokasai</dc:creator><pubDate>Fri, 25 Mar 2016 11:16:42 GMT</pubDate><content:encoded>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
 
 &lt;p&gt;I've thougt a lot about how to name that code generator. Indeed, it's &lt;br&gt;
 programmed using somewhat bad practices, that shouldn't be used in a regular &lt;br&gt;
 project. However, despite all its fault, this project possesses one of the most &lt;br&gt;
 important properties one should expect from software: &lt;em&gt;it works.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2 id="meetjoseph"&gt;Meet Joseph&lt;/h2&gt;
+&lt;h6 id="meetjoseph"&gt;Meet Joseph&lt;/h6&gt;
 
 &lt;p&gt;Joseph is cool, Joseph is hip. Joseph is young. Joseph has dreams. Joseph is a &lt;br&gt;
 first year student.&lt;/p&gt;
@@ -70,8 +70,7 @@ To get a random letter, Joseph uses random again: &lt;br&gt;
 &lt;p&gt;Now, to call them.&lt;/p&gt;
 
 &lt;p&gt;Using all its software development experience, Joseph takes the initiative to &lt;br&gt;
-instantiate a globally scoped &lt;br&gt;
-list of functions: &lt;code&gt;terminals&lt;/code&gt;.&lt;/p&gt;
+instantiate a globally scoped list of functions: &lt;code&gt;terminals&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;terminals = [generate_int, generate_string]&lt;/code&gt;&lt;/p&gt;
 
