@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Ludum Files]]></title><description><![CDATA[Lost documents on Game Crafting]]></description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Fri, 25 Mar 2016 11:33:03 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[The first year student's Tiger Generator]]></title><description><![CDATA[<h2 id="intro">Intro</h2>
+
+<p>I've thougt a lot about how to name that code generator. Indeed, it's <br>
+programmed using somewhat bad practices, that shouldn't be used in a regular <br>
+project. However, despite all its fault, this project possesses one of the most <br>
+important properties one should expect from software: <em>it works.</em></p>
+
+<h2 id="meetjoseph">Meet Joseph</h2>]]></description><link>http://localhost:2368/the-first-year-students-tiger-generator/</link><guid isPermaLink="false">844153bb-1af9-410f-90ac-0a07bef0e2b2</guid><dc:creator><![CDATA[kinokasai]]></dc:creator><pubDate>Fri, 25 Mar 2016 11:16:42 GMT</pubDate><content:encoded><![CDATA[<h2 id="intro">Intro</h2>
+
+<p>I've thougt a lot about how to name that code generator. Indeed, it's <br>
+programmed using somewhat bad practices, that shouldn't be used in a regular <br>
+project. However, despite all its fault, this project possesses one of the most <br>
+important properties one should expect from software: <em>it works.</em></p>
+
+<h2 id="meetjoseph">Meet Joseph</h2>
+
+<p>Joseph is cool, Joseph is hip. Joseph is young. Joseph has dreams. Joseph is a <br>
+first year student.</p>
+
+<p>Joseph - in a flash of dazzling youngness - decides to write a Tiger <br>
+Generator in Python.</p>
+
+<h2 id="firststepterminals">First step: terminals</h2>
+
+<p>However, Joseph has no idea how to build a code generator from scratch. <br>
+After a short moment of reflexion, he comes to two conclusions. <br>
+First one is that all code is in the end only a sequence of letters, a string. <br>
+The second one is the following: <br>
+To build a generator from scratch, one must ask what the language's building <br>
+blocks are. In tiger, those are terminals. Luckily, there's only two of them: <br>
+<code>int</code> and <code>string</code>. So Joseph builds functions to generate those terminals.</p>
+
+<p>"What's an int for the Tiger language?" ponders Joseph.
+Now, Joseph might be young, but he knows that documentation is important. <br>
+Browsing the documentation, he finds the following sentence: <br>
+"Since the compiler targets 32-bit architectures, since it needs to handle
+signed integers, a literal integer value must fit in a signed 32-bit integer" <br>
+"Ah ! Since we must reserve one bit for the sign, only 31 bits are available.
+So an int is nothing more than a number between 0 and 2^31 - 1"</p>
+
+<p>"But since I'm generating code, that is to say a blob of text, I must not
+forget to stringify it."</p>
+
+<p>Luckily for Joseph, Python makes it ridiculously easy to generate that with the <br>
+random module.</p>
+
+<pre><code>max_int = 2147483647  
+# Joseph is only a first year student, and while he's slightly ahead
+of the class, the aforementioned class hasn't got to pow() yet.
+
+def generate_int():  
+   return str(random.randint(0, max_int))
+</code></pre>
+
+<p>Generating a terminal string is not much more difficult. Indeed, a random <br>
+string in nothing more than a sequence of random letters.</p>
+
+<p>Python possesses a string containing all letters, <code>string.ascii_letters</code> <br>
+To get a random letter, Joseph uses random again: <br>
+<code>random.choice(string.ascii_letters)</code></p>
+
+<p>Then, we join the result:</p>
+
+<pre><code>def generate_string():  
+    str_size = random.randint(1, 20)) # String size
+    return "\"" + ''.join(random.choice(string.ascii_letters)
+       for i in range(str_size)) + "\""
+</code></pre>
+
+<p>Now, to call them.</p>
+
+<p>Using all its software development experience, Joseph takes the initiative to <br>
+instantiate a globally scoped <br>
+list of functions: <code>terminals</code>.</p>
+
+<p><code>terminals = [generate_int, generate_string]</code></p>
+
+<p>He then proceeds to build the wrapper function:</p>
+
+<pre><code>def generate_dec():  
+    dec = random.choice(terminals)
+    return dec()
+</code></pre>
+
+<p>To put the final touch to his Magnus Opus, his Guernica, his Mona Lisa, <br>
+Joseph writes the main function:</p>
+
+<pre><code>def generate_code():  
+    code = ''
+    for i in range(0, dec):
+        code += generate_dec() + '\n'
+    return code;
+
+if __name__ == '__main__':  
+    print(generate_code())
+</code></pre>
+
+<p>And then, exhausted by his work, Joseph falls asleep, knowing deep inside that, <br>
+in the end, what he had there was a correct, parsable, bindable, type-correct <br>
+generator.</p>]]></content:encoded></item><item><title><![CDATA[Welcome to Ghost]]></title><description><![CDATA[<p>You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at <code>&lt;your blog URL&gt;/ghost/</code>. When you arrive, you can select this post from a list</p>]]></description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">75c3c329-3c27-40ce-81a5-7d2844759f8b</guid><category><![CDATA[Getting Started]]></category><dc:creator><![CDATA[kinokasai]]></dc:creator><pubDate>Fri, 25 Mar 2016 10:55:11 GMT</pubDate><content:encoded><![CDATA[<p>You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at <code>&lt;your blog URL&gt;/ghost/</code>. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!</p>
+
+<h2 id="gettingstarted">Getting Started</h2>
+
+<p>Ghost uses something called Markdown for writing. Essentially, it's a shorthand way to manage your post formatting as you write!</p>
+
+<p>Writing in Markdown is really easy. In the left hand panel of Ghost, you simply write as you normally would. Where appropriate, you can use <em>shortcuts</em> to <strong>style</strong> your content. For example, a list:</p>
+
+<ul>
+<li>Item number one</li>
+<li>Item number two
+<ul><li>A nested item</li></ul></li>
+<li>A final item</li>
+</ul>
+
+<p>or with numbers!</p>
+
+<ol>
+<li>Remember to buy some milk  </li>
+<li>Drink the milk  </li>
+<li>Tweet that I remembered to buy the milk, and drank it</li>
+</ol>
+
+<h3 id="links">Links</h3>
+
+<p>Want to link to a source? No problem. If you paste in a URL, like <a href="http://ghost.org">http://ghost.org</a> - it'll automatically be linked up. But if you want to customise your anchor text, you can do that too! Here's a link to <a href="http://ghost.org">the Ghost website</a>. Neat.</p>
+
+<h3 id="whataboutimages">What about Images?</h3>
+
+<p>Images work too! Already know the URL of the image you want to include in your article? Simply paste it in like this to make it show up:</p>
+
+<p><img src="https://ghost.org/images/ghost.png" alt="The Ghost Logo"></p>
+
+<p>Not sure which image you want to use yet? That's ok too. Leave yourself a descriptive placeholder and keep writing. Come back later and drag and drop the image in to upload:</p>
+
+<h3 id="quoting">Quoting</h3>
+
+<p>Sometimes a link isn't enough, you want to quote someone on what they've said. Perhaps you've started using a new blogging platform and feel the sudden urge to share their slogan? A quote might be just the way to do it!</p>
+
+<blockquote>
+  <p>Ghost - Just a blogging platform</p>
+</blockquote>
+
+<h3 id="workingwithcode">Working with Code</h3>
+
+<p>Got a streak of geek? We've got you covered there, too. You can write inline <code>&lt;code&gt;</code> blocks really easily with back ticks. Want to show off something more comprehensive? 4 spaces of indentation gets you there.</p>
+
+<pre><code>.awesome-thing {
+    display: block;
+    width: 100%;
+}
+</code></pre>
+
+<h3 id="readyforabreak">Ready for a Break?</h3>
+
+<p>Throw 3 or more dashes down on any new line and you've got yourself a fancy new divider. Aw yeah.</p>
+
+<hr>
+
+<h3 id="advancedusage">Advanced Usage</h3>
+
+<p>There's one fantastic secret about Markdown. If you want, you can write plain old HTML and it'll still work! Very flexible.</p>
+
+<p><input type="text" placeholder="I'm an input field!"></p>
+
+<p>That should be enough to get you started. Have fun - and let us know what you think :)</p>]]></content:encoded></item></channel></rss>
