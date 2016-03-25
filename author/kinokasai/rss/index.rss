@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>kinokasai - Ludum Files</title><description>Lost documents on Game Crafting</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Fri, 25 Mar 2016 11:44:29 GMT</lastBuildDate><atom:link href="http://localhost:2368/author/kinokasai/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>The first year student's Tiger Generator</title><description>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>kinokasai - Ludum Files</title><description>Lost documents on Game Crafting</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Fri, 25 Mar 2016 11:55:02 GMT</lastBuildDate><atom:link href="http://localhost:2368/author/kinokasai/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>The first year student's Tiger Generator</title><description>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
 
 &lt;p&gt;I've thougt a lot about how to name that code generator. Indeed, it's &lt;br&gt;
 programmed using somewhat bad practices, that shouldn't be used in a regular &lt;br&gt;
@@ -59,7 +59,7 @@ string in nothing more than a sequence of random letters.&lt;/p&gt;
 To get a random letter, Joseph uses random again: &lt;br&gt;
 &lt;code&gt;random.choice(string.ascii_letters)&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Then, we join the result:&lt;/p&gt;
+&lt;p&gt;Then, he joins the result:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="language- language-python"&gt;def generate_string():  
     str_size = random.randint(1, 20)) # String size
