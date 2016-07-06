@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>kinokasai - Ludum Files</title><description>Lost documents on Game Crafting</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Fri, 25 Mar 2016 15:24:30 GMT</lastBuildDate><atom:link href="http://localhost:2368/author/kinokasai/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>The first year student's Tiger Generator</title><description>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>kinokasai - Ludum Files</title><description>Lost documents on Game Crafting</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Sat, 26 Mar 2016 16:00:05 GMT</lastBuildDate><atom:link href="http://localhost:2368/author/kinokasai/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>The first year student's Tiger Generator</title><description>&lt;h2 id="intro"&gt;Intro&lt;/h2&gt;
 
 &lt;p&gt;I've thougt a lot about how to name that code generator. Indeed, it's programmed using somewhat bad practices, that shouldn't be used in a regular project. However, despite all its fault, this project possesses one of the most important properties one should expect from software: &lt;em&gt;it works.&lt;/em&gt;&lt;/p&gt;
 
@@ -12,7 +12,17 @@
 
 &lt;p&gt;Joseph - in a flash of dazzling youngness - decides to write a Tiger Generator in Python.&lt;/p&gt;
 
-&lt;h2 id="firststepterminals"&gt;First step: terminals&lt;/h2&gt;
+&lt;h2 id="generatororganisation"&gt;Generator organisation&lt;/h2&gt;
+
+&lt;p&gt;After a dash of thinking, Joseph decides to make his generator behave like &lt;em&gt;bison&lt;/em&gt; - a grammar-exploring program would do. A sequence of functions that would explore one of the many possible branches of Tiger's grammar.&lt;/p&gt;
+
+&lt;p&gt;For example, a variable declaration would be the following sequence: &lt;br&gt;
+&lt;code&gt;generate_code()-&amp;gt;generate_dec()-&amp;gt;generate_var_dec()&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;And for a int expression containg a loop: &lt;br&gt;
+&lt;code&gt;generate_code()-&amp;gt;generate_while()-&amp;gt;generate_exp_int()[*3]-&amp;gt;generate_int()&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id="firststepprimitivetypes"&gt;First step: Primitive types&lt;/h2&gt;
 
 &lt;p&gt;However, Joseph has no idea how to build a code generator from scratch. After a short moment of reflexion, he comes to two conclusions. First one is that all code is in the end only a sequence of letters, a string. The second one is the following: &lt;br&gt;
 To build a generator from scratch, one must ask what the language's building blocks are. In tiger, those are terminals. Luckily, there's only two of them: &lt;code&gt;int&lt;/code&gt; and &lt;code&gt;string&lt;/code&gt;. So Joseph builds functions to generate those terminals.&lt;/p&gt;
@@ -76,7 +86,232 @@ if __name__ == '__main__':
     print(generate_code())
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;And then, exhausted by his work, Joseph falls asleep, knowing deep inside that, in the end, what he had there was a correct, parsable, bindable, type-correct generator.&lt;/p&gt;</content:encoded></item><item><title>Welcome to Ghost</title><description>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list&lt;/p&gt;</description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">75c3c329-3c27-40ce-81a5-7d2844759f8b</guid><category>Getting Started</category><dc:creator>kinokasai</dc:creator><pubDate>Fri, 25 Mar 2016 10:55:11 GMT</pubDate><content:encoded>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!&lt;/p&gt;
+&lt;p&gt;And then, exhausted by his work, Joseph falls asleep, knowing deep inside that, in the end, what he had there was a correct, parsable, bindable, type-correct generator.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h3 id="idgeneration"&gt;Id generation&lt;/h3&gt;
+
+&lt;p&gt;Joseph's first approach is using the same method he used to generate a random string.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language- language-python"&gt;def generate_rand_id():  
+    id = ''.join(random.choice(string.ascii_letters)
+        for i in range(8)
+    return id
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However, that quickly makes code very confusing to read. Take the following snippet:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language- language-tiger"&gt;let  
+    type ezFEKfe { AEFIfdsE: int, ZFfseAZz: string }
+    var ZEjFzPpD : ezFEKfe = ezFEKfe { AEFIfdse = 3, ZFfseAZz = "ezfizejfi" }
+in  
+    ZEjFzPpD
+end  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Not really readable, is it? Joseph arrived at the same conclusion. That's why he decided to use another approach and use a &lt;em&gt;dictionary&lt;/em&gt;. Not a dictionary in the data structure sense, but indeed something akin to Oxford's. The dictionary data is contained in a simple text file, where one noun follows the other. At initialisation, the generator parses the file, and adds all the ids into a set.&lt;/p&gt;
+
+&lt;p&gt;However, Tiger possesses three namespaces: one for functions, another for variables, and the last one for types. From there, there's two approaches. The first one is to duplicate trice the content of the set, to remove id from the corresponding set. Second one is to create three empty sets representing used ids, and on id generation, add it to the corresponding set. While more memory efficient, the second approach is gradually more inefficient for each id generated - and theoretically could take infinite time to compute.&lt;/p&gt;
+
+&lt;p&gt;Joseph, programming on his brand new laptop, /*add too much precision here */ chose to go with the first approach. His &lt;code&gt;generate_id()&lt;/code&gt; now resembles the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-python"&gt;def generate_id(set):  
+    id = random.sample(set, 1)[0]
+    set.remove(id)
+    return id
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However, there's one check Joseph almost forgot. One must ensure that no keywords are present in the set.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h2 id="types"&gt;Types&lt;/h2&gt;
+
+&lt;p&gt;When Joseph awoke on the second day, he realised his error. Indeed, he was striving to create a generator that could enforce type correctness. However, what he had built since yesterday had no idea what was a type. Having read a fairly long share of his Python book, Joseph decided to create a class.&lt;/p&gt;
+
+&lt;p&gt;"What's in a type?", Joseph asked himself.&lt;/p&gt;
+
+&lt;p&gt;His brain /* insert JVM speed joke here */, Joseph arrives to the following conclusions:&lt;/p&gt;
+
+&lt;p&gt;In Tiger, types are declared as records. As said in the documentation:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Records are defined by a list of fields between braces in the following fashion: &lt;code&gt;type indexed_string = {index : int, value : string}&lt;/code&gt;
+  and initialized in the following way: &lt;code&gt;indexed_string { index = 3, value = 'str' }&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So there's two sorts of types: primitive types and records.&lt;/p&gt;
+
+&lt;p&gt;In a type, there's a few attributes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The type's name&lt;/li&gt;
+&lt;li&gt;The type's fields&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It should be noted that a type only possesses fields when it's not a primitive one.&lt;/p&gt;
+
+&lt;p&gt;And in a field - being only a tuple:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The field's name&lt;/li&gt;
+&lt;li&gt;The field's type&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Having identified what would the fields of a Type class be, Joseph started pondering what methods would be useful. Despite his youthfulness, or maybe thanks to it, Joseph is quite pragmatic. He began by thinking about how he would use such a class. He came up with two examples.&lt;/p&gt;
+
+&lt;p&gt;First one's about primitive types:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language- language-python"&gt;    int_t = Type('int', primitive=True)
+    # Primitive types don't need a declare() method.
+    int_t.generate()
+    # desired output: `12312`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Second one is about a record, &lt;code&gt;indexed_string&lt;/code&gt;:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language- language-python"&gt;    indexed_string_t = Type('indexed_string', primitive=True)
+    # How to add a field to generate ?
+    # Add an add_field() method.
+    indexed_string_t.add_field(Field('index', int_t))
+    indexed_string_t.add_field(Field('value', string_t))
+
+    indexed_string_t.declare()
+    # desired output:
+    # `type indexed_string = { index: int, value : string }`
+
+    indexed_string_t.generate()
+    # desired output:
+    # `indexed_string { index = 124, value = "randomstring" }`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;"A type must know its field. However, generating all the fields before creating the type could prove cumbersome, so I'll add an &lt;code&gt;add_field()&lt;/code&gt; to the Type class."&lt;/p&gt;
+
+&lt;p&gt;Joseph's Type and Field classes' draft presents like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language- language-python"&gt;class Type:  
+    def __init__(self, id):
+    def add_field(self, field)
+    def declare(self):
+    def generate(self):
+
+class Field:  
+    def __init__(self, id, ty):
+    def declare(self):
+    def generate(self):
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="typedeclaration"&gt;Type declaration&lt;/h3&gt;
+
+&lt;p&gt;Type declaration isn't really complicated. A declaration follows the following syntax: &lt;br&gt;
+&lt;code&gt;type type_id { field1_id : field1_ty, fieldn_id : fieldn_ty }&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language- language-python"&gt;#declare() shouldn't be called on a primitive type, no need for a
+#special case.
+
+#type_dec
+def declare(self):  
+    code = 'type' + self.id + ' { '
+    code += self.fields[0].declare()
+    for i in range(1, len(self.fields)):
+        code += ', ' + self.fields[i].declare()
+    return code
+
+#field_dec
+def declare(self):  
+    code = self.id + ' : ' + self.ty
+    return code
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="typegeneration"&gt;Type generation&lt;/h3&gt;
+
+&lt;p&gt;"I want my types to generate an instance of themselves."&lt;/p&gt;
+
+&lt;p&gt;Type instance generation is a bit trickier than declaration. Contrariwise to declaration, &lt;code&gt;generate()&lt;/code&gt; can be called on primitive types, and must work recursively. Indeed, one of the type's field can be another record.&lt;/p&gt;
+
+&lt;p&gt;First thing first, Joseph builds a draft of the Type class. It's supposed to work for primitive types.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language- language-python"&gt;   def generate(self):
+       if self.id == 'int':
+           return generate_int()
+       else if self.id == 'string':
+           return generate_string()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, his implementation works for primitive types. While the decision to hardcode &lt;code&gt;int&lt;/code&gt; and &lt;code&gt;string&lt;/code&gt; behaviours may be surprising, it actually makes sense. Firstly, &lt;code&gt;int&lt;/code&gt; and &lt;code&gt;string&lt;/code&gt; are builtin types in the Tiger Language.  They also are the first types declared in Jospeh's generator. So, it's impossible to re-generate an int or string type.&lt;/p&gt;
+
+&lt;p&gt;In a more down-to-earth way, that's also the recursion's base cases. Indeed, even when the type is a record containing a thousand records, everything amounts to a number of ints and strings.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language- language-python"&gt;#field_generate
+def generate(self):  
+    return self.id + '=' + self.ty.generate()
+
+#type_generate()
+def generate(self):  
+    if self.id == 'int':
+        return generate_int()
+    else if self.id == 'string':
+        return generate_string()
+    else:
+        code = self.id + '{'
+        # Joseph makes the assumption that all record will have
+        # at least one field.
+        code += self.fields[0].generate()
+        for i in range(1, len(fields)):
+            code += ', ' + self.fields[i].generate()
+        code += '}'
+        return code
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="generationfunctions"&gt;Generation Functions&lt;/h3&gt;
+
+&lt;p&gt;Joseph has added type declaration and generation to his program. But he never calls those functions anywhere. He hasn't even touched the concept of declaration functions. He decided then to build it's first structure.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language- language-python"&gt;def generate_field():  
+    ty = random.choice(types)
+    id = generate_id(var_set)
+    return Field(id, ty)
+
+def generate_type_dec():  
+    id = generate_id(type_set)
+    ty = Type(id)
+    field_num = random.randint(1, 3)
+    for i in range(field_num):
+        ty.add_field(generate_field())
+   types.append(ty)
+   return ty.declare()
+
+def generate_dec():  
+    return random.choice(decs)()
+
+#First, primitive types
+int_t = Type('int')  
+string_t = Type('string')
+
+# Types are stored in a list
+types = [int_t, string_t]
+
+# List of declaration generation functions
+decs = [generate_type_dec]
+
+def generate_code():  
+    code = ''
+    for i in range(0, 3):
+        code += generate_dec() + '\n'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However, what's generated here is not correct Tiger. Indeed, declarations must be enclosed in a &lt;code&gt;let-in&lt;/code&gt; exp. However Joseph's only working on declarations for now. So he used a little trick to simulate a &lt;code&gt;let-in&lt;/code&gt; exp.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language- language-python"&gt;def generate_code():  
+    code = 'let\n'
+    for i in range(0, 3):
+        code += generate_dec() + '\n'
+    code += 'in\nend\n'
+    return code
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But the resulting code is still not properly indented. For that, Jospeh needs an indentation module.&lt;/p&gt;</content:encoded></item><item><title>Welcome to Ghost</title><description>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list&lt;/p&gt;</description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">75c3c329-3c27-40ce-81a5-7d2844759f8b</guid><category>Getting Started</category><dc:creator>kinokasai</dc:creator><pubDate>Fri, 25 Mar 2016 10:55:11 GMT</pubDate><content:encoded>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!&lt;/p&gt;
 
 &lt;h2 id="gettingstarted"&gt;Getting Started&lt;/h2&gt;
 

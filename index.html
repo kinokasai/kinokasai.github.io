@@ -1,4 +1,3 @@
-
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -41,7 +40,7 @@
     </script>
 
     <meta name="generator" content="Ghost 0.7">
-    <link rel="alternate" type="application/rss+xml" title="Ludum Files" href="rss.7">
+    <link rel="alternate" type="application/rss+xml" title="Ludum Files" href="rss.8">
 </head>
 <body class="home-template">
 
@@ -51,7 +50,7 @@
                 <div class="site-title-wrapper">
                         <h1 class="site-title"><a class="js-ajax-link" title="Ludum Files" href="index.html">Ludum Files</a></h1>
 
-                        <a class="button-square" href="rss.7"><i class="fa fa-rss"></i></a>
+                        <a class="button-square" href="rss.8"><i class="fa fa-rss"></i></a>
                 </div>
 
                 <ul class="site-nav">
@@ -87,7 +86,17 @@
 
 <p>Joseph - in a flash of dazzling youngness - decides to write a Tiger Generator in Python.</p>
 
-<h2 id="firststepterminals">First step: terminals</h2>
+<h2 id="generatororganisation">Generator organisation</h2>
+
+<p>After a dash of thinking, Joseph decides to make his generator behave like <em>bison</em> - a grammar-exploring program would do. A sequence of functions that would explore one of the many possible branches of Tiger's grammar.</p>
+
+<p>For example, a variable declaration would be the following sequence: <br>
+<code>generate_code()-&gt;generate_dec()-&gt;generate_var_dec()</code></p>
+
+<p>And for a int expression containg a loop: <br>
+<code>generate_code()-&gt;generate_while()-&gt;generate_exp_int()[*3]-&gt;generate_int()</code></p>
+
+<h2 id="firststepprimitivetypes">First step: Primitive types</h2>
 
 <p>However, Joseph has no idea how to build a code generator from scratch. After a short moment of reflexion, he comes to two conclusions. First one is that all code is in the end only a sequence of letters, a string. The second one is the following: <br>
 To build a generator from scratch, one must ask what the language's building blocks are. In tiger, those are terminals. Luckily, there's only two of them: <code>int</code> and <code>string</code>. So Joseph builds functions to generate those terminals.</p>
@@ -152,6 +161,231 @@ if __name__ == '__main__':
 </code></pre>
 
 <p>And then, exhausted by his work, Joseph falls asleep, knowing deep inside that, in the end, what he had there was a correct, parsable, bindable, type-correct generator.</p>
+
+<hr>
+
+<h3 id="idgeneration">Id generation</h3>
+
+<p>Joseph's first approach is using the same method he used to generate a random string.</p>
+
+<pre><code class="language- language-python">def generate_rand_id():  
+    id = ''.join(random.choice(string.ascii_letters)
+        for i in range(8)
+    return id
+</code></pre>
+
+<p>However, that quickly makes code very confusing to read. Take the following snippet:  </p>
+
+<pre><code class="language- language-tiger">let  
+    type ezFEKfe { AEFIfdsE: int, ZFfseAZz: string }
+    var ZEjFzPpD : ezFEKfe = ezFEKfe { AEFIfdse = 3, ZFfseAZz = "ezfizejfi" }
+in  
+    ZEjFzPpD
+end  
+</code></pre>
+
+<p>Not really readable, is it? Joseph arrived at the same conclusion. That's why he decided to use another approach and use a <em>dictionary</em>. Not a dictionary in the data structure sense, but indeed something akin to Oxford's. The dictionary data is contained in a simple text file, where one noun follows the other. At initialisation, the generator parses the file, and adds all the ids into a set.</p>
+
+<p>However, Tiger possesses three namespaces: one for functions, another for variables, and the last one for types. From there, there's two approaches. The first one is to duplicate trice the content of the set, to remove id from the corresponding set. Second one is to create three empty sets representing used ids, and on id generation, add it to the corresponding set. While more memory efficient, the second approach is gradually more inefficient for each id generated - and theoretically could take infinite time to compute.</p>
+
+<p>Joseph, programming on his brand new laptop, /*add too much precision here */ chose to go with the first approach. His <code>generate_id()</code> now resembles the following:</p>
+
+<pre><code class="language-python">def generate_id(set):  
+    id = random.sample(set, 1)[0]
+    set.remove(id)
+    return id
+</code></pre>
+
+<p>However, there's one check Joseph almost forgot. One must ensure that no keywords are present in the set.</p>
+
+<hr>
+
+<h2 id="types">Types</h2>
+
+<p>When Joseph awoke on the second day, he realised his error. Indeed, he was striving to create a generator that could enforce type correctness. However, what he had built since yesterday had no idea what was a type. Having read a fairly long share of his Python book, Joseph decided to create a class.</p>
+
+<p>"What's in a type?", Joseph asked himself.</p>
+
+<p>His brain /* insert JVM speed joke here */, Joseph arrives to the following conclusions:</p>
+
+<p>In Tiger, types are declared as records. As said in the documentation:</p>
+
+<blockquote>
+  <p>Records are defined by a list of fields between braces in the following fashion: <code>type indexed_string = {index : int, value : string}</code>
+  and initialized in the following way: <code>indexed_string { index = 3, value = 'str' }</code></p>
+</blockquote>
+
+<p>So there's two sorts of types: primitive types and records.</p>
+
+<p>In a type, there's a few attributes:</p>
+
+<ul>
+<li>The type's name</li>
+<li>The type's fields</li>
+</ul>
+
+<p>It should be noted that a type only possesses fields when it's not a primitive one.</p>
+
+<p>And in a field - being only a tuple:</p>
+
+<ul>
+<li>The field's name</li>
+<li>The field's type</li>
+</ul>
+
+<p>Having identified what would the fields of a Type class be, Joseph started pondering what methods would be useful. Despite his youthfulness, or maybe thanks to it, Joseph is quite pragmatic. He began by thinking about how he would use such a class. He came up with two examples.</p>
+
+<p>First one's about primitive types:  </p>
+
+<pre><code class="language- language-python">    int_t = Type('int', primitive=True)
+    # Primitive types don't need a declare() method.
+    int_t.generate()
+    # desired output: `12312`
+</code></pre>
+
+<p>Second one is about a record, <code>indexed_string</code>:  </p>
+
+<pre><code class="language- language-python">    indexed_string_t = Type('indexed_string', primitive=True)
+    # How to add a field to generate ?
+    # Add an add_field() method.
+    indexed_string_t.add_field(Field('index', int_t))
+    indexed_string_t.add_field(Field('value', string_t))
+
+    indexed_string_t.declare()
+    # desired output:
+    # `type indexed_string = { index: int, value : string }`
+
+    indexed_string_t.generate()
+    # desired output:
+    # `indexed_string { index = 124, value = "randomstring" }`
+</code></pre>
+
+<p>"A type must know its field. However, generating all the fields before creating the type could prove cumbersome, so I'll add an <code>add_field()</code> to the Type class."</p>
+
+<p>Joseph's Type and Field classes' draft presents like that:</p>
+
+<pre><code class="language- language-python">class Type:  
+    def __init__(self, id):
+    def add_field(self, field)
+    def declare(self):
+    def generate(self):
+
+class Field:  
+    def __init__(self, id, ty):
+    def declare(self):
+    def generate(self):
+</code></pre>
+
+<h3 id="typedeclaration">Type declaration</h3>
+
+<p>Type declaration isn't really complicated. A declaration follows the following syntax: <br>
+<code>type type_id { field1_id : field1_ty, fieldn_id : fieldn_ty }</code></p>
+
+<pre><code class="language- language-python">#declare() shouldn't be called on a primitive type, no need for a
+#special case.
+
+#type_dec
+def declare(self):  
+    code = 'type' + self.id + ' { '
+    code += self.fields[0].declare()
+    for i in range(1, len(self.fields)):
+        code += ', ' + self.fields[i].declare()
+    return code
+
+#field_dec
+def declare(self):  
+    code = self.id + ' : ' + self.ty
+    return code
+</code></pre>
+
+<h3 id="typegeneration">Type generation</h3>
+
+<p>"I want my types to generate an instance of themselves."</p>
+
+<p>Type instance generation is a bit trickier than declaration. Contrariwise to declaration, <code>generate()</code> can be called on primitive types, and must work recursively. Indeed, one of the type's field can be another record.</p>
+
+<p>First thing first, Joseph builds a draft of the Type class. It's supposed to work for primitive types.</p>
+
+<pre><code class="language- language-python">   def generate(self):
+       if self.id == 'int':
+           return generate_int()
+       else if self.id == 'string':
+           return generate_string()
+</code></pre>
+
+<p>Now, his implementation works for primitive types. While the decision to hardcode <code>int</code> and <code>string</code> behaviours may be surprising, it actually makes sense. Firstly, <code>int</code> and <code>string</code> are builtin types in the Tiger Language.  They also are the first types declared in Jospeh's generator. So, it's impossible to re-generate an int or string type.</p>
+
+<p>In a more down-to-earth way, that's also the recursion's base cases. Indeed, even when the type is a record containing a thousand records, everything amounts to a number of ints and strings.</p>
+
+<pre><code class="language- language-python">#field_generate
+def generate(self):  
+    return self.id + '=' + self.ty.generate()
+
+#type_generate()
+def generate(self):  
+    if self.id == 'int':
+        return generate_int()
+    else if self.id == 'string':
+        return generate_string()
+    else:
+        code = self.id + '{'
+        # Joseph makes the assumption that all record will have
+        # at least one field.
+        code += self.fields[0].generate()
+        for i in range(1, len(fields)):
+            code += ', ' + self.fields[i].generate()
+        code += '}'
+        return code
+</code></pre>
+
+<h3 id="generationfunctions">Generation Functions</h3>
+
+<p>Joseph has added type declaration and generation to his program. But he never calls those functions anywhere. He hasn't even touched the concept of declaration functions. He decided then to build it's first structure.  </p>
+
+<pre><code class="language- language-python">def generate_field():  
+    ty = random.choice(types)
+    id = generate_id(var_set)
+    return Field(id, ty)
+
+def generate_type_dec():  
+    id = generate_id(type_set)
+    ty = Type(id)
+    field_num = random.randint(1, 3)
+    for i in range(field_num):
+        ty.add_field(generate_field())
+   types.append(ty)
+   return ty.declare()
+
+def generate_dec():  
+    return random.choice(decs)()
+
+#First, primitive types
+int_t = Type('int')  
+string_t = Type('string')
+
+# Types are stored in a list
+types = [int_t, string_t]
+
+# List of declaration generation functions
+decs = [generate_type_dec]
+
+def generate_code():  
+    code = ''
+    for i in range(0, 3):
+        code += generate_dec() + '\n'
+</code></pre>
+
+<p>However, what's generated here is not correct Tiger. Indeed, declarations must be enclosed in a <code>let-in</code> exp. However Joseph's only working on declarations for now. So he used a little trick to simulate a <code>let-in</code> exp.</p>
+
+<pre><code class="language- language-python">def generate_code():  
+    code = 'let\n'
+    for i in range(0, 3):
+        code += generate_dec() + '\n'
+    code += 'in\nend\n'
+    return code
+</code></pre>
+
+<p>But the resulting code is still not properly indented. For that, Jospeh needs an indentation module.</p>
     </div>
 
     <footer class="post-footer clearfix">
